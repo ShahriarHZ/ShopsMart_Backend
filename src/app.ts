@@ -18,6 +18,10 @@ import { notFoundHandler, errorHandler } from './middleware/error.middleware';
 export const createApp = (): Application => {
   const app = express();
 
+  // Render (and most PaaS platforms) sit behind a reverse proxy — this tells Express to trust
+  // the X-Forwarded-* headers it sets, which secure cookies and rate-limiting both rely on.
+  app.set('trust proxy', 1);
+
   // Security headers
   app.use(helmet());
 

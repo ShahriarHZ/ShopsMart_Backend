@@ -11,7 +11,11 @@ const REFRESH_COOKIE_NAME = 'refreshToken';
 const cookieOptions = {
   httpOnly: true,
   secure: env.isProd,
-  sameSite: 'strict' as const,
+  // 'strict' works fine on localhost (same site, different ports), but frontend and backend
+  // now live on genuinely different domains in production (vercel.app vs onrender.com) —
+  // that requires 'none' (paired with secure:true, which is already set above) or the browser
+  // will silently refuse to send the cookie back on any cross-origin request.
+  sameSite: (env.isProd ? 'none' : 'strict') as 'none' | 'strict',
   path: '/api/v1/auth',
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
 };
