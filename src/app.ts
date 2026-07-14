@@ -11,6 +11,7 @@ import mongoSanitize from 'express-mongo-sanitize';
 const xss = require('xss-clean');
 
 import { env } from './config/env';
+import { logger } from './utils/logger';
 import routes from './routes';
 import { stripeWebhook } from './controllers/checkout.controller';
 import { notFoundHandler, errorHandler } from './middleware/error.middleware';
@@ -42,7 +43,8 @@ export const createApp = (): Application => {
           }
         }
         if (origin === env.clientUrl) return callback(null, true);
-        return callback(new Error(`Not allowed by CORS: ${origin}`));
+        logger.warn(`CORS rejected origin "${origin}" — does not match CLIENT_URL "${env.clientUrl}"`);
+        return callback(new Error(`CORS_NOT_ALLOWED: ${origin}`));
       },
       credentials: true,
     })

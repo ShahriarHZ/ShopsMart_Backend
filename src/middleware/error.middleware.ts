@@ -16,7 +16,9 @@ export const errorHandler = (
 ): void => {
   let error = err;
 
-  if (!(error instanceof ApiError)) {
+  if (error.message?.startsWith('CORS_NOT_ALLOWED')) {
+    error = new ApiError(403, 'This origin is not allowed to access the API. Check the CLIENT_URL configuration.');
+  } else if (!(error instanceof ApiError)) {
     logger.error('Unhandled error', err);
     error = ApiError.internal(env.isDev ? err.message : 'Something went wrong');
   }
