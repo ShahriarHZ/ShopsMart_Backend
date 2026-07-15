@@ -181,22 +181,6 @@ npm install
 cp .env.example .env
 ```
 
-Update the following variables:
-
-```env
-MONGODB_URI=
-JWT_ACCESS_SECRET=
-JWT_REFRESH_SECRET=
-CLIENT_URL=
-
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
-
-STRIPE_SECRET_KEY=
-STRIPE_WEBHOOK_SECRET=
-```
-
 ### Run Development Server
 
 ```bash
@@ -228,9 +212,8 @@ npm run seed:admin
 Uses:
 
 ```env
-ADMIN_NAME=
-ADMIN_EMAIL=
-ADMIN_PASSWORD=
+ADMIN_EMAIL=admin@shopsmart.ai
+ADMIN_PASSWORD=ChangeMe123
 ```
 
 ### Import Sample Products
@@ -246,21 +229,6 @@ src/data/products.seed.json
 ```
 
 ---
-
-## 🔑 Important Environment Variables
-
-| Variable | Description |
-|-----------|-------------|
-| MONGODB_URI | MongoDB Atlas Connection String |
-| JWT_ACCESS_SECRET | JWT Access Token Secret |
-| JWT_REFRESH_SECRET | JWT Refresh Token Secret |
-| CLIENT_URL | Frontend URL |
-| CLOUDINARY_* | Cloudinary Credentials |
-| STRIPE_SECRET_KEY | Stripe Secret Key |
-| STRIPE_WEBHOOK_SECRET | Stripe Webhook Secret |
-
----
-
 ## 📚 API Overview
 
 ### Base URL
